@@ -1,0 +1,14 @@
+.decks{
+    max-width: 100%;
+    margin-top: 50px;
+}
+.decks__wrapper{
+    width: 60%;
+    margin: 0 auto;
+}
+.decks__list{
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

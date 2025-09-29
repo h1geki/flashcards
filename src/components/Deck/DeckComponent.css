@@ -1,0 +1,25 @@
+.deck{
+    max-width: 370px;
+    width:100%;
+    padding: 20px 15px; 
+    max-height: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    padding-bottom: 30px;
+}
+
+.deck__img{
+    width: 340px;
+    height: 100px;
+    background-color: blueviolet;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+
+}
+.deck__descr{
+    margin-bottom: 30px;
+}

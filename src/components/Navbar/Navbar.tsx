@@ -6,7 +6,7 @@ import './Navbar.css'
 const Navbar:React.FunctionComponent = () => {
   
   const navLinks = [
-    {icon:BookOpen , text:'My decks', to:'/decks'},
+    {icon:BookOpen , text:'My decks', to:'/'},
     {icon:TrendingUp , text:'Statistic', to:'/statistic'},
     {icon:Plus, text:'Create', to:'/create'}
   ]
