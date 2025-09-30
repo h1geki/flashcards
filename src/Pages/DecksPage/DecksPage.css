@@ -10,5 +10,12 @@
     margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 20px;
+}
+
+.decks__message{
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 20px;
 }

@@ -9,6 +9,7 @@
     border: 1px solid lightgray;
     border-radius: 20px;
     padding-bottom: 30px;
+    position: relative;
 }
 
 .deck__img{
@@ -22,4 +23,12 @@
 }
 .deck__descr{
     margin-bottom: 30px;
+}
+
+.deck__delete{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    color: red;
+    cursor: pointer;
 }

@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { Deck } from '../../types/Deck'
 import cardBgc from '../../imgs/card-bgc.jpeg'
 import './DecksPage.css'
 import DeckComponent from '../../components/Deck/DeckComponent'
 import './DecksPage.css'
-import MyButton from '../../components/ui/MyButton/MyButton'
-import {Plus} from 'lucide-react'
 
-const DecksPage:React.FunctionComponent = () => {
+interface DecksPageProps{
+    decks:Deck[] | [];
+    setDecks:(decks:Deck[]) => void
+}
 
-  const decks:Deck[] = [
-    {title:'Deutsch' , logo:cardBgc, desck:'Основные слова и фразы для изучения немецкого'},
-    {title:'Englisch' , logo:cardBgc, desck:'Основные слова и фразы для изучения английского'},
-    {title:'Common' , logo:cardBgc, desck:'Основные слова и фразы для изучения common'}
-  ]
+
+const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => {
+  const removeDeck = (id:number):void => {
+    const filterDecks = decks.filter(deck => deck.id !== id)
+    setDecks(filterDecks)
+  }
+
   return (
     <div className='decks'>
         <div className="decks__wrapper">
@@ -23,14 +26,18 @@ const DecksPage:React.FunctionComponent = () => {
                     <p className='decks__descr'>Manage your card decks</p>
                 </div>
             </div>
-
-            <div className='decks__list'>
+            {
+                decks?.length ? <div className='decks__list'>
                 {
                     decks.map(deck => (
-                        <DeckComponent key={deck.title} deck={deck}/>
+                        <DeckComponent key={deck.id} deck={deck} removeDeck={removeDeck}/>
                     ))
                 }
             </div>
+            :
+            <div className='decks__message'>You don't have decks yet</div>
+            }
+            
         </div>
     </div>
   )
