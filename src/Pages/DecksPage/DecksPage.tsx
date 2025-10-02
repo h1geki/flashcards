@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, type ReactEventHandler } from 'react'
 import type { Deck } from '../../types/Deck'
 import DeckComponent from '../../components/Deck/DeckComponent'
 import './DecksPage.css'
 import { Plus, Save } from 'lucide-react'
 import Modal from '../../components/Modal/Modal'
 import MyTextArea from '../../components/ui/MyInput/MyTextArea'
+import type { DeckForm } from '../../types/DeckForm'
+import axios from 'axios'
 
 interface DecksPageProps{
     decks:Deck[] | [];
@@ -23,24 +25,54 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
     setDecks(filterDecks)
   }
 
+  const [deckFormData , setDeckFormData] = useState<DeckForm>({
+    title:'',
+    descr:'',
+    logo:'',
+    cards:[],
+  })
+
+  const createDeck = async () => {
+    const response = await axios.post<Deck>('https://68dbf0f1445fdb39dc2727be.mockapi.io/decks',deckFormData)
+    setDecks([...decks, response.data])
+    setIsModal(false)
+    setDeckFormData({
+      title: '',
+      descr: '',
+      logo: '',
+      cards: [],
+    })
+  }
+
   const handleModal = () => {
     setIsModal(!isModal)
   }
   const handleModalCard = () => {
     setIsModalCard(!isModalCard)
   }
+
+  const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    const {name , value} = e.target
+    setDeckFormData((prev) => ({...prev, [name]:value}))
+  }
+
+  const handleSubmit = (e:React.FormEvent) => {
+    e.preventDefault()
+    createDeck()
+    
+  }
   return (
     <div className='decks'>
         <Modal isModal={isModal}>
             <div className='decks__modal-title'>Create a new Deck</div>
-            <form className='decks__modal__form'>
+            <form className='decks__modal__form' onSubmit={handleSubmit}>
                 <div className='decks__modal__form__text-wrapper'>
                     <label htmlFor="deck-name">Deck name</label>
-                    <MyTextArea name='deck-name' rows={5} placeholder={'Enter Deck name'}/>
+                    <MyTextArea value={deckFormData.title} onChange={handleChange} name='title' rows={5} placeholder={'Enter Deck name'}/>
                 </div>
                 <div className='decks__modal__form__text-wrapper'>
                     <label htmlFor="deck-descr">Deck description</label>
-                    <MyTextArea name='deck-descr' rows={5} placeholder={'Enter Deck description'}/>
+                    <MyTextArea onChange={handleChange} name='descr' rows={5} placeholder={'Enter Deck description'}/>
                 </div>
                 <div className='decks__modal__form__btns'>
                     <button className='dekcs__modal__form__btns-save'><Save size={17}/> Save Deck</button>
@@ -53,12 +85,12 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
             <div className='decks__modal-title'>Create a new Card</div>
             <form className='decks__modal__form'>
                 <div className='decks__modal__form__text-wrapper'>
-                    <label htmlFor="deck-name">Card firstside</label>
-                    <MyTextArea name='deck-name' rows={5} placeholder={'Enter Card firstside text'}/>
+                    <label htmlFor="card-firstSide">Card firstside</label>
+                    <MyTextArea name='card-firstSide' rows={5} placeholder={'Enter Card firstside text'}/>
                 </div>
                 <div className='decks__modal__form__text-wrapper'>
-                    <label htmlFor="deck-descr">Card secondside</label>
-                    <MyTextArea name='deck-descr' rows={5} placeholder={'Enter Card secondside text'}/>
+                    <label htmlFor="card-secondSide">Card secondside</label>
+                    <MyTextArea name='card-secondSide' rows={5} placeholder={'Enter Card secondside text'}/>
                 </div>
                 <div className='decks__modal__form__btns'>
                     <button className='dekcs__modal__form__btns-save'><Save size={17}/> Save Card</button>
