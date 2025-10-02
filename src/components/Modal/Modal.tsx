@@ -3,11 +3,10 @@
 
     interface ModalProps{
         children:ReactNode,
-        isModal:boolean,
-        handleModal:() => void
+        isModal:boolean
     }
 
-    const Modal:React.FunctionComponent<ModalProps> = ({children, isModal,handleModal}) => {
+    const Modal:React.FunctionComponent<ModalProps> = ({children, isModal}) => {
     return isModal ? (
         <div className='modal'>
             <div className='modal__content'>

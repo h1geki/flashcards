@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import type { Deck } from '../../types/Deck'
-import cardBgc from '../../imgs/card-bgc.jpeg'
-import './DecksPage.css'
 import DeckComponent from '../../components/Deck/DeckComponent'
 import './DecksPage.css'
-import MyButton from '../../components/ui/MyButton/MyButton'
 import { Plus, Save } from 'lucide-react'
 import Modal from '../../components/Modal/Modal'
 import MyTextArea from '../../components/ui/MyInput/MyTextArea'
@@ -19,7 +16,7 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
 
 
   const [isModal , setIsModal] = useState(false)
-
+  const [isModalCard , setIsModalCard] = useState(false)
 
   const removeDeck = (id:number):void => {
     const filterDecks = decks.filter(deck => deck.id !== id)
@@ -29,9 +26,12 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
   const handleModal = () => {
     setIsModal(!isModal)
   }
+  const handleModalCard = () => {
+    setIsModalCard(!isModalCard)
+  }
   return (
     <div className='decks'>
-        <Modal isModal={isModal} handleModal={handleModal}>
+        <Modal isModal={isModal}>
             <div className='decks__modal-title'>Create a new Deck</div>
             <form className='decks__modal__form'>
                 <div className='decks__modal__form__text-wrapper'>
@@ -47,8 +47,26 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
                     <button className='dekcs__modal__form__btns-cancel' onClick={() => handleModal()}>Cancel</button>
                 </div>    
             </form>
-
         </Modal>
+
+        <Modal isModal={isModalCard}>
+            <div className='decks__modal-title'>Create a new Card</div>
+            <form className='decks__modal__form'>
+                <div className='decks__modal__form__text-wrapper'>
+                    <label htmlFor="deck-name">Card firstside</label>
+                    <MyTextArea name='deck-name' rows={5} placeholder={'Enter Card firstside text'}/>
+                </div>
+                <div className='decks__modal__form__text-wrapper'>
+                    <label htmlFor="deck-descr">Card secondside</label>
+                    <MyTextArea name='deck-descr' rows={5} placeholder={'Enter Card secondside text'}/>
+                </div>
+                <div className='decks__modal__form__btns'>
+                    <button className='dekcs__modal__form__btns-save'><Save size={17}/> Save Card</button>
+                    <button className='dekcs__modal__form__btns-cancel' onClick={() => handleModalCard()}>Cancel</button>
+                </div>    
+            </form>
+        </Modal>
+        
         <div className="decks__wrapper">
             <div className='decks__header'>
                 <div className='decks__text'>
@@ -61,7 +79,7 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
                 decks?.length ? <div className='decks__list'>
                 {
                     decks.map(deck => (
-                        <DeckComponent key={deck.id} deck={deck} removeDeck={removeDeck}/>
+                        <DeckComponent key={deck.id} deck={deck} removeDeck={removeDeck} handleModalCard={handleModalCard}/>
                     ))
                 }
             </div>
