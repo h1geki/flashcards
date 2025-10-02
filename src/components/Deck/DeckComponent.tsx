@@ -19,7 +19,10 @@ const DeckComponent:React.FunctionComponent <DeckComponentProps> = ({deck, remov
       <div className='deck__img'>
       </div>
       <p className='deck__descr'>{deck.descr}</p>
-      <MyButton onClick={() =>navigate(`/${deck.id}`)} >Learn</MyButton>
+      <div className='deck__btns'>
+        <MyButton onClick={() =>navigate(`/${deck.id}`)} >Learn</MyButton>
+        <button className='deck__btns-add'>Add Card</button>
+      </div>
       <Trash onClick={() => removeDeck(deck.id)}  className='deck__delete'/>
     </div>
   )

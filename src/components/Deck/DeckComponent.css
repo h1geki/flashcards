@@ -32,3 +32,19 @@
     color: red;
     cursor: pointer;
 }
+.deck__btns{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.deck__btns button{
+    width: 50%;
+}
+
+.deck__btns-add{
+    background-color: white;
+    color: black;
+    border: 1px solid lightgray;
+    outline: none;
+    border-radius:7px ;
+}
