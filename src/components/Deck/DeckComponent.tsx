@@ -10,7 +10,7 @@ import Modal from '../Modal/Modal';
 interface DeckComponentProps {
   deck:Deck;
   removeDeck:(id:number)=>void;
-  handleModalCard:() => void
+  handleModalCard:(deckID:number) => void
 }
 const DeckComponent:React.FunctionComponent <DeckComponentProps> = ({deck, removeDeck , handleModalCard}) => {
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ const DeckComponent:React.FunctionComponent <DeckComponentProps> = ({deck, remov
       <p className='deck__descr'>{deck.descr}</p>
       <div className='deck__btns'>
         <MyButton onClick={() =>navigate(`/${deck.id}`)} >Learn</MyButton>
-        <button className='deck__btns-add' onClick={() => handleModalCard()} >Add Card</button>
+        <button className='deck__btns-add' onClick={() => handleModalCard(deck.id)} >Add Card</button>
       </div>
       <Trash onClick={() => removeDeck(deck.id)}  className='deck__delete'/>
     </div>

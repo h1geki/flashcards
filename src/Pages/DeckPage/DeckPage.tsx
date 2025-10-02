@@ -7,8 +7,6 @@ import { Target, Check , X } from 'lucide-react'
 import './DeckPage.css'
 import CardComponent from '../../components/Card/CardComponent'
 import type { Card } from '../../types/Card'
-import MyButton from '../../components/ui/MyButton/MyButton'
-
 interface DeckPageProps{
     decks:Deck[]
 }
@@ -85,31 +83,41 @@ const DeckPage:React.FunctionComponent<DeckPageProps> = ({decks}) => {
 
   return (
     <div className='deck-cards'>
-        
-            
             <div className='deck-cards__wrapper'>
-                <div className='deck-cards__progress'>
-                    <p> <Target/> Study progress  {answersCount}/{cardsCount}</p>
-                    <div className='deck-cards__progress__answers'>
-                            <p className='deck-cards__propgress__answers-elem'><Check className='deck-cards__propgress__answers-elem-correct'/>{correctCount} <br /> Правильно</p>
-                            <p className='deck-cards__propgress__answers-elem'><X className='deck-cards__propgress__answers-elem-wrong'/> {wrongCount} <br />  Неправильно</p>
-                    </div>
-                </div>
                 {
-                    isResult 
-                ? 
-                <div className='deck-cards__result'>
-                    <p>Deck completed! 🎉</p>
-                    <span>You got {correctCount} correct of {cardsCount}</span>
-                    <button onClick={() => restart()}>Restart</button>
-                </div> 
-                : 
-                <div className='deck-cards__cards__wrapper'>
-                    <p className='deck-cards__cards__wrapper__title'>Card {answersCount+1} of {cardsCount}</p>
-                    <p className='deck-cards__cards__wrapper__descr'>Learning deck "{currentDeck?.title}"</p>
-                    <CardComponent handleCorrectClick={handleCorrectClick} handleWrongClick={handleWrongClick} handleCardClick={handleCardClick} currentCard = {currentCard} setCurrentCard = {setCurrentCard} currentSideIndex={currentSideIndex}/>
-                </div>
+                    cardsCount === 0 ? (
+                    <div className='deck-cards__empty'>
+                        <h1>No cards</h1>
+                    </div>) : (
+                            <>
+                                <div className='deck-cards__progress'>
+                                    <p> <Target/> Study progress  {answersCount}/{cardsCount}</p>
+                                    <div className='deck-cards__progress__answers'>
+                                            <p className='deck-cards__propgress__answers-elem'><Check className='deck-cards__propgress__answers-elem-correct'/>{correctCount} <br /> Правильно</p>
+                                            <p className='deck-cards__propgress__answers-elem'><X className='deck-cards__propgress__answers-elem-wrong'/> {wrongCount} <br />  Неправильно</p>
+                                    </div>
+                                </div>
+                                {
+                                    isResult 
+                                            ? 
+                                            <div className='deck-cards__result'>
+                                                <p>Deck completed! 🎉</p>
+                                                <span>You got {correctCount} correct of {cardsCount}</span>
+                                                <button onClick={() => restart()}>Restart</button>
+                                            </div> 
+                                            : 
+                                            <div className='deck-cards__cards__wrapper'>
+                                                <p className='deck-cards__cards__wrapper__title'>Card {answersCount+1} of {cardsCount}</p>
+                                                <p className='deck-cards__cards__wrapper__descr'>Learning deck "{currentDeck?.title}"</p>
+                                                <CardComponent handleCorrectClick={handleCorrectClick} handleWrongClick={handleWrongClick} handleCardClick={handleCardClick} currentCard = {currentCard} setCurrentCard = {setCurrentCard} currentSideIndex={currentSideIndex}/>
+                                            </div>
+                                }
+                            
+                            </>
+                    )
                 }
+
+                
             </div>
 
         
