@@ -1,10 +1,12 @@
 import React from 'react'
 import { BookOpen,Plus, TrendingUp } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
 const Navbar:React.FunctionComponent = () => {
   
+  const navigate = useNavigate()
+
   const navLinks = [
     {icon:BookOpen , text:'My decks', to:'/'},
     {icon:TrendingUp , text:'Statistic', to:'/statistic'},
@@ -14,7 +16,7 @@ const Navbar:React.FunctionComponent = () => {
   return (
     <header className='header'>
         <nav className='header__navigation'>
-            <div className='header__logo'>
+            <div className='header__logo' onClick={() => navigate('/')}>
                 <div className='header__logo-img'>
                     <BookOpen/>
                 </div>

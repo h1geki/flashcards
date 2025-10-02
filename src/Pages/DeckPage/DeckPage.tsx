@@ -100,7 +100,7 @@ const DeckPage:React.FunctionComponent<DeckPageProps> = ({decks}) => {
                 ? 
                 <div className='deck-cards__result'>
                     <p>Deck completed! 🎉</p>
-                    <span>You got {correctCount} correct answers of {cardsCount}</span>
+                    <span>You got {correctCount} correct of {cardsCount}</span>
                     <button onClick={() => restart()}>Restart</button>
                 </div> 
                 : 
