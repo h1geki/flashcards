@@ -14,13 +14,13 @@ interface DecksPageProps{
     setDecks:(decks:Deck[]) => void
 }
 
-
 const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => {
 
   
   const [isModal , setIsModal] = useState(false)
   const [isModalCard , setIsModalCard] = useState(false)
   const [currentDeckId,setCurrentDeckId] = useState<number | null>(null)
+  const apiKey = import.meta.env.VITE_API_KEY
 
   const removeDeck = async (id:number) => {
     if (!window.confirm('Вы уверены, что хотите удалить эту колоду?')) {
@@ -28,7 +28,7 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
     }
 
     try{
-      await axios.delete(`https://68dbf0f1445fdb39dc2727be.mockapi.io/decks/${id}`)
+      await axios.delete(`${apiKey}/decks/${id}`)
       const filterDecks = decks.filter(deck => deck.id !== id)
       setDecks(filterDecks)
 
@@ -52,7 +52,7 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
   })
 
   const createDeck = async () => {
-    const response = await axios.post<Deck>('https://68dbf0f1445fdb39dc2727be.mockapi.io/decks',deckFormData)
+    const response = await axios.post<Deck>(`${apiKey}/decks`,deckFormData)
     setDecks([...decks, response.data])
     setIsModal(false)
     setDeckFormData({
@@ -115,7 +115,7 @@ const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => 
         ...updateDeck, cards:[...updateDeck.cards , newCard]
       }
 
-      const response = await axios.put<Deck>(`https://68dbf0f1445fdb39dc2727be.mockapi.io/decks/${currentDeckId}` , newDeck)
+      const response = await axios.put<Deck>(`${apiKey}/decks/${currentDeckId}` , newDeck)
       
       setDecks(decks.map(deck => deck.id === currentDeckId ? response.data : deck))
 
