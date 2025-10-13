@@ -23,11 +23,12 @@ const DeckPage:React.FunctionComponent<DeckPageProps> = ({decks}) => {
     const [currentSideIndex , setCurrentSideIndex] = useState<1 | 0>(0)
     const [cardIndex, setCardIndex] = useState(0)
     const [isResult, setIsPesult] = useState(false)
+    const apiKey = import.meta.env.VITE_API_KEY
 
 
 
     const fetchCurrentDeck = async (id:typeof deckId) =>{
-        const res =  await axios.get<Deck>('https://68dbf0f1445fdb39dc2727be.mockapi.io/decks/'+deckId)
+        const res = await axios.get<Deck>(`${apiKey}/decks/`+deckId)
         return res.data 
     }
 
