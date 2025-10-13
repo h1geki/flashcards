@@ -17,7 +17,7 @@ interface DecksPageProps{
 
 const DecksPage:React.FunctionComponent<DecksPageProps> = ({decks,setDecks}) => {
 
-
+  
   const [isModal , setIsModal] = useState(false)
   const [isModalCard , setIsModalCard] = useState(false)
   const [currentDeckId,setCurrentDeckId] = useState<number | null>(null)

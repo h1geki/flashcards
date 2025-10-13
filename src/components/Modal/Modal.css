@@ -17,3 +17,21 @@
     background-color: white;
     width: 40vw;
 }
+
+@media (max-width:1024px) {
+    .modal__content{
+        width: 80vw
+    }
+}
+
+@media (max-width:768px) {
+    .modal__content{
+        width: 80vw
+    }
+}
+
+@media (max-width:425px) {
+    .modal__content{
+        width: 80vw;
+    }
+}

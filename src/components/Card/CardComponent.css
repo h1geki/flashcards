@@ -56,3 +56,9 @@
 }.btn-correct:hover{
     background-color: #15803d;
 }
+
+@media (max-width:425px) {
+    .card{
+        width: 400px;
+    }   
+}

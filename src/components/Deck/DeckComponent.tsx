@@ -4,7 +4,6 @@ import MyButton from '../ui/MyButton/MyButton';
 import './DeckComponent.css'
 import { Trash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../Modal/Modal';
 
 
 interface DeckComponentProps {

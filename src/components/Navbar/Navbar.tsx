@@ -8,9 +8,8 @@ const Navbar:React.FunctionComponent = () => {
   const navigate = useNavigate()
 
   const navLinks = [
-    {icon:BookOpen , text:'My decks', to:'/'},
-    {icon:TrendingUp , text:'Statistic', to:'/statistic'},
-  ]
+    {icon:BookOpen , text:'My decks', to:'/'}  
+]
   
   return (
     <header className='header'>
