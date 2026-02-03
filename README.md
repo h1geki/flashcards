@@ -8,5 +8,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## FlashCards app
-FlashCards is a simplified version of Quizlet. You can create your own decks and add flashcards to them for study. App also has responsive design
+FlashCards is a simplified version of Quizlet. You can create your own decks and add flashcards to them for study. App also has responsive design.
+Technology Stack: TypeScript, React, mockapi.io, Vite
 
